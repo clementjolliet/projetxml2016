@@ -1,4 +1,11 @@
-var http = require("http");
+try {
+    var existdbnode = require("existdb-node");
+	var http = require("http");
+} catch (ex) {
+    handleErr(ex);
+	console.log("Echec chargment plugin");
+}
+
 http.createServer(function (request, response) {
 	response.writeHead(200, {
 		'Content-Type': 'text/plain'
