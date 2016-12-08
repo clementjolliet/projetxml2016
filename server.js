@@ -1,16 +1,30 @@
 try {
     var existdbnode = require("existdb-node");
 	var http = require("http");
+	var querystring = require('querystring');
+	var url = require('url');
 } catch (ex) {
     handleErr(ex);
-	console.log("Echec chargment plugin");
+	console.log("Echec chargment framework node");
 }
 
-http.createServer(function (request, response) {
-	response.writeHead(200, {
-		'Content-Type': 'text/plain'
-	});
-	response.write('Serveur node JS Hello World !')
-	response.end();
-	console.log("Node.js server running on port 1337");
-}).listen(1337);
+var server = http.createServer(function(req, res) {
+
+    var params = querystring.parse(url.parse(req.url).query);
+
+    res.writeHead(200, {"Content-Type": "text/plain"});
+
+    if ('query' in params) 
+    {
+        res.write('Votre requete est ' + params['query']);
+    }
+    else 
+    {
+        res.write('Wrong parameters');
+    }
+
+    res.end();
+
+});
+
+server.listen(1337);
