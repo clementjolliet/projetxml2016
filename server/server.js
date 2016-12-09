@@ -22,15 +22,17 @@ var server = http.createServer(function(req, res) {
     {
         urlHTTP += 'search=' + params['search'] + '&';
     }
-
-    if ('start' in params && params['start'] != "") 
+    else
     {
-        urlHTTP += 'start=' + params['start']  + '&';
-    }
+    	 if ('start' in params && params['start'] != "") 
+	    {
+	        urlHTTP += 'start=' + params['start']  + '&';
+	    }
 
-    if ('length' in params && params['length'] != "") 
-    {
-        urlHTTP += 'length=' + params['length']  + '&';
+	    if ('length' in params && params['length'] != "") 
+	    {
+	        urlHTTP += 'length=' + params['length']  + '&';
+	    }
     }
 
     // Appel HTTP pour effectuer la rechercher sur la BD
@@ -58,6 +60,17 @@ var server = http.createServer(function(req, res) {
 		  result.on('data', (chunk) => rawData += chunk);
 		  result.on('end', () => {
 			    try {
+			    	if (rawData == "null")
+			    	{
+			    		rawData = '[]';
+			    	}
+
+			    	if ('search' in params && params['search'] != "")
+			    	{
+			    		rawData = JSON.parse(rawData);
+			    		rawData = rawData.slice(parseInt(params['start']), parseInt(params['start']) + parseInt(params['length']));
+			    		rawData = JSON.stringify(rawData);
+			    	}
 			      	res.write(rawData);
 					res.end();
 			    } catch (e) {
