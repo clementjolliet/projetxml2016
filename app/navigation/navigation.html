@@ -1,73 +1,49 @@
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!">Référence</a></li>
-    <li><a href="#!">Étude</a></li>
-    <li><a href="#!">Région</a></li>
-    <li><a href="#!">Département</a></li>
-    <li><a href="#!">Commune</a></li>
-    <li><a href="#!">Insee</a></li>
-    <li><a href="#!">Type</a></li>
-    <li><a href="#!">Adresse</a></li>
-    <li><a href="#!">Affe</a></li>
-    <li><a href="#!">Nom</a></li>
-    <li><a href="#!">Date d'inscription</a></li>
-    <li><a href="#!">Siècle</a></li>
-</ul>
-<nav id='navigation'>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="#">Bienvenue sur Merimee</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Liste<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
+<div class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0)">Bienvenue sur Merimee</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div>
+                    <select>
+                        <option value="REF">Référence</option>
+                        <option value="ETUD">Étude</option>
+                        <option value="REG">Région</option>
+                        <option value="DPT">Département</option>
+                        <option value="COM">Commune</option>
+                        <option value="INSEE">Insee</option>
+                        <option value="TICO">Type</option>
+                        <option value="ADRS">Adresse</option>
+                        <option value="AFFE">Affe</option>
+                        <option value="PPRO">Nom</option>
+                        <option value="DPRO">Date d'inscription</option>
+                        <option value="SCLE">Siècle</option>
+                    </select>
+                    <input type="text" class="form-control col-md-8" placeholder="Rechercher">
+                    <a href="javascript:void(0)" class="btn btn-raised btn-xs">Valider</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <div id='formRecherche'>
     <input type='text' name='inpSearch' id='inpSearch'/>
     <select name="searchBy" id="searchBy">
-                <option value="REF">Référence</option>
-                <option value="ETUD">Étude</option>
-                <option value="REG">Région</option>
-                <option value="DPT">Département</option>
-                <option value="COM">Commune</option>
-                <option value="INSEE">Insee</option>
-                <option value="TICO">Type</option>
-                <option value="ADRS">Adresse</option>
-                <option value="AFFE">Affe</option>
-                <option value="PPRO">Nom</option>
-                <option value="DPRO">Date d'inscription</option>
-                <option value="SCLE">Siècle</option>
+        <option value="REF">Référence</option>
+        <option value="ETUD">Étude</option>
+        <option value="REG">Région</option>
+        <option value="DPT">Département</option>
+        <option value="COM">Commune</option>
+        <option value="INSEE">Insee</option>
+        <option value="TICO">Type</option>
+        <option value="ADRS">Adresse</option>
+        <option value="AFFE">Affe</option>
+        <option value="PPRO">Nom</option>
+        <option value="DPRO">Date d'inscription</option>
+        <option value="SCLE">Siècle</option>
     </select>
     <button type='button'>Valider</button>
 </div>
-
-<script>
-    $( document ).ready(function){
-        $(".dropdown-button").dropdown();
-    }
-</script>
-
-<!--<nav id="navigation">
-    <ul id="menu-bar">
-        <li class="active"><a href="#">Bienvenue sur Merimee</a></li>
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-        <li>
-            <select name="searchBy" id="searchBy">
-                <option value="REF">Référence</option>
-                <option value="ETUD">Étude</option>
-                <option value="REG">Région</option>
-                <option value="DPT">Département</option>
-                <option value="COM">Commune</option>
-                <option value="INSEE">Insee</option>
-                <option value="TICO">Type</option>
-                <option value="ADRS">Adresse</option>
-                <option value="AFFE">Affe</option>
-                <option value="PPRO">Nom</option>
-                <option value="DPRO">Date d'inscription</option>
-                <option value="SCLE">Siècle</option>
-            </select>
-        </li>
-    </ul>
-</nav>-->
