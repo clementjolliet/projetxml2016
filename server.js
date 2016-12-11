@@ -3,18 +3,19 @@ try {
 	var querystring = require('querystring');
 	var url = require('url');
 	var fs = require("fs");
+	var express = require('express');
 } catch (ex) {
     handleErr(ex);
 	console.log("Echec chargement framework node");
 }
 
-var server = http.createServer(function(req, res) {
+var app = express.createServer(function(req, res) {
 
 	// Récupération des paramètres de l'url
     var params = querystring.parse(url.parse(req.url).query);
 
     // Header de la réponse
-    res.writeHead(200, {"Content-Type": "text/json"});
+    res.writeHead(200, {"Content-Type": "text/json", 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Methods' : 'PUT, GET, POST, DELETE, OPTIONS', 'Access-Control-Allow-Headers' : 'Content-Type'});
 
     var searchBy = 'REF';
 
@@ -77,4 +78,4 @@ var server = http.createServer(function(req, res) {
 	});
 });
 
-server.listen(1337);
+app.listen(1337);
