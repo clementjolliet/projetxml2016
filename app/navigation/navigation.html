@@ -6,7 +6,7 @@
             </ul>
             <form class="navbar-form navbar-left">
                 <div>
-                    <select>
+                    <select id="searchBy">
                         <option value="REF">Référence</option>
                         <option value="ETUD">Étude</option>
                         <option value="REG">Région</option>
@@ -20,30 +20,12 @@
                         <option value="DPRO">Date d'inscription</option>
                         <option value="SCLE">Siècle</option>
                     </select>
-                    <input type="text" class="form-control col-md-8" placeholder="Rechercher">
-                    <a href="javascript:void(0)" class="btn btn-raised btn-xs">Valider</a>
+                    <input id="inpSearch" type="text" class="form-control col-md-8" placeholder="Rechercher">
+                    <a href="javascript:void(0)" class="btn btn-raised btn-xs" onclick="afficheMonuments()">Valider</a>
                 </div>
             </form>
         </div>
     </div>
-</div>
-
-
-<div id='formRecherche'>
-    <input type='text' name='inpSearch' id='inpSearch'/>
-    <select name="searchBy" id="searchBy">
-        <option value="REF">Référence</option>
-        <option value="ETUD">Étude</option>
-        <option value="REG">Région</option>
-        <option value="DPT">Département</option>
-        <option value="COM">Commune</option>
-        <option value="INSEE">Insee</option>
-        <option value="TICO">Type</option>
-        <option value="ADRS">Adresse</option>
-        <option value="AFFE">Affe</option>
-        <option value="PPRO">Nom</option>
-        <option value="DPRO">Date d'inscription</option>
-        <option value="SCLE">Siècle</option>
-    </select>
-    <button type='button' id='searchButton' onclick="searchClic()">Valider</button>
+    <div id="listeMonuments">
+    </div>
 </div>

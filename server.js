@@ -40,7 +40,7 @@ var app = express.createServer(function(req, res) {
         urlHTTP += 'length=' + params['length'] + '&';
     }
     
-
+    console.log(urlHTTP);
 
     // Appel HTTP pour effectuer la rechercher sur la BD
     http.get(urlHTTP, (result) => {
