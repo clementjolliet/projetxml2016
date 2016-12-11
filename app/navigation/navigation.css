@@ -1,0 +1,10 @@
+#formRecherche {
+    margin: 50px;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+#formRecherche select {
+    display: inline-block;
+    margin-bottom: 20px;
+}

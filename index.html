@@ -1,89 +1,96 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
 
-  <!--<style>
-        html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0
-        }
-        #EmplacementDeMaCarte {
-          height: 30%
-        }
-      </style>-->
+        <!--<style>
+              html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0
+              }
+              #EmplacementDeMaCarte {
+                height: 30%
+              }
+            </style>-->
 
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjc3PraqEFlK6fjnOvHF1CKBVCtRd1z2M"></script>
- <script>
-      function initialisation(){
-        var optionsCarte = {
-        zoom: 8,
-        center: new google.maps.LatLng(47.389982, 0.688877)
-      }
-      var maCarte = new google.maps.Map(document.getElementById("EmplacementDeMaCarte"), optionsCarte);
-    }
-    google.maps.event.addDomListener(window, 'load', initialisation);
-    </script>-->
-  
-    <title>Hello World</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/angular2-polyfills.js"></script>
-    <script src="https://code.angularjs.org/tools/system.js"></script>
-    <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/Rx.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.6/angular2.dev.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjc3PraqEFlK6fjnOvHF1CKBVCtRd1z2M"></script>
+       <script>
+            function initialisation(){
+              var optionsCarte = {
+              zoom: 8,
+              center: new google.maps.LatLng(47.389982, 0.688877)
+            }
+            var maCarte = new google.maps.Map(document.getElementById("EmplacementDeMaCarte"), optionsCarte);
+          }
+          google.maps.event.addDomListener(window, 'load', initialisation);
+          </script>-->
+
+        <title>Hello World</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.6/angular2-polyfills.js"></script>
+        <script src="https://code.angularjs.org/tools/system.js"></script>
+        <script src="https://code.angularjs.org/tools/typescript.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.6/Rx.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-beta.6/angular2.dev.js"></script>
+
+
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"  media="screen,projection"/>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+        <script>
+            System.config({
+                transpiler: 'typescript',
+                typescriptOptions: {emitDecoratorMetadata: true},
+                packages: {'app': {defaultExtension: 'ts'}}
+            });
+            System.import('/app/environment_main')
+                    .then(null, console.error.bind(console));
+        </script>
+
+    </head>
+    <body>
+        <!--<form action="http://localhost:1337/" method="GET">
+                <input name="search" placeholder="search"/>
+                <input name="start" placeholder="start"/>
+                <input name="length" placeholder="length"/>
+                <input type="submit"/>
+        </form>
+        <p></p>-->
+    <navig_app>Loading...</navig_app>
+    <!--<p> Une fois le serveur lancé avec node server.js et la base de données Exist démarré, on peut lancer une recherche dans la base XML
+            via un appel HTTP en GET sur le serveur (http://localhost:1337/).
+            Les parametres sont : <br/>
+            - search : la chaine de caractères de recherche <br/>
+            - start : la position dans la liste resultat <br/>
+            - length : le nombre de résultat à afficher <br/>
+
+            L'appel HTTP retourne toutes les données sur les monuments trouvés en JSON
+            
+            <h1> Plus qu'a fait l'interface client qui met joliment toutes ces données !! :) (NSM l'UTF8)</h1>
+    </p>
+
+<div id="EmplacementDeMaCarte">
+<noscript>
+  <p>Attention : </p>
+  <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
+  <p>Or, il semble que JavaScript est désactivé ou qu'il ne soit pas supporté par votre navigateur.</p>
+  <p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis essayez à nouveau.</p>
+</noscript>
+</div>-->
+
     
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
-	
-    <script>
-      System.config({
-        transpiler: 'typescript',
-        typescriptOptions: { emitDecoratorMetadata: true },
-        packages: {'app': {defaultExtension: 'ts'}}
-      });
-      System.import('/app/environment_main')
-            .then(null, console.error.bind(console));
-    </script>
-
-  </head>
-<body>
-	<!--<form action="http://localhost:1337/" method="GET">
-		<input name="search" placeholder="search"/>
-		<input name="start" placeholder="start"/>
-		<input name="length" placeholder="length"/>
-		<input type="submit"/>
-	</form>
-	<p></p>-->
-	<navig_app>Loading...</navig_app>
-	<!--<p> Une fois le serveur lancé avec node server.js et la base de données Exist démarré, on peut lancer une recherche dans la base XML
-		via un appel HTTP en GET sur le serveur (http://localhost:1337/).
-		Les parametres sont : <br/>
-		- search : la chaine de caractères de recherche <br/>
-		- start : la position dans la liste resultat <br/>
-		- length : le nombre de résultat à afficher <br/>
-
-		L'appel HTTP retourne toutes les données sur les monuments trouvés en JSON
-		
-		<h1> Plus qu'a fait l'interface client qui met joliment toutes ces données !! :) (NSM l'UTF8)</h1>
-	</p>
-
-  <div id="EmplacementDeMaCarte">
-    <noscript>
-      <p>Attention : </p>
-      <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
-      <p>Or, il semble que JavaScript est désactivé ou qu'il ne soit pas supporté par votre navigateur.</p>
-      <p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis essayez à nouveau.</p>
-    </noscript>
-  </div>-->
-
-        
 </body>
 
 </html> 
