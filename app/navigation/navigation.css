@@ -57,6 +57,20 @@
   margin-bottom: 10px;
 }
 
-#listeMonuments span span{
-  font-size: 16px;
+#listeMonuments span div{
+  font-size: 20px;
+  color:black;
+}
+
+#fleches img:first-child{
+  cursor:pointer;
+  margin-left: 40%;
+  width:10%;
+  height: 7%;
+}
+
+#fleches img:nth-child(2){
+  cursor:pointer;
+  width:10%;
+  height: 7%;
 }

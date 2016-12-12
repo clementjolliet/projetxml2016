@@ -4,6 +4,7 @@ try {
 	var url = require('url');
 	var fs = require("fs");
 	var express = require('express');
+	var sparql = require('sparql-client');
 } catch (ex) {
     handleErr(ex);
 	console.log("Echec chargement framework node");
@@ -40,6 +41,8 @@ var app = express.createServer(function(req, res) {
         urlHTTP += 'length=' + params['length'] + '&';
     }
 
+    
+
     // Appel HTTP pour effectuer la rechercher sur la BD
     http.get(urlHTTP, (result) => {
 		  const statusCode = result.statusCode;
@@ -65,6 +68,8 @@ var app = express.createServer(function(req, res) {
 		  result.on('data', (chunk) => rawData += chunk);
 		  result.on('end', () => {
 			    try {
+
+			    var query = "SELECT DISTINCT ?item (group_concat(distinct ?merimee ; separator = ', ') as ?merimee) ?coords ?image WHERE { { SELECT DISTINCT ?item ?merimee  WHERE { FILTER regex(?merimee, 'PA00078014') . ?item wdt:P1435/wdt:P279* wd:Q916475 . ?item p:P1435 ?heritage_statement . FILTER NOT EXISTS { ?heritage_statement pq:P582 ?end . } ?item wdt:P380 ?merimee. } ORDER BY ?merimee } ?item wdt:P131/wdt:P131* wd:Q142 . OPTIONAL { ?item wdt:P625 ?coords . } OPTIONAL { ?item wdt:P18 ?image . } SERVICE wikibase:label { bd:serviceParam wikibase:language 'fr' . } } GROUP BY ?item  ?coords ?image";
 			      	res.write(rawData);
 					res.end();
 			    } catch (e) {
