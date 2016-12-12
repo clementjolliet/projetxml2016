@@ -9,12 +9,24 @@ try {
 	var express = require('express');
 	var wdk = require('wikidata-sdk')
 	var util = require('util');
+	var RateLimit = require('express-rate-limit');
 } catch (ex) {
     handleErr(ex);
 	console.log("Echec chargement framework node");
 }
 
 var app = express.createServer(function(req, res) {
+ 
+	app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
+	 
+	var limiter = new RateLimit({
+	  windowMs: 15*60*1000, // 15 minutes 
+	  max: 100, // limit each IP to 100 requests per windowMs 
+	  delayMs: 0 // disable delaying - full speed until the max limit is reached 
+	});
+	 
+	//  apply to all requests 
+	app.use(limiter);
 
 	// Récupération des paramètres de l'url
     var params = querystring.parse(url.parse(req.url).query);
@@ -56,6 +68,7 @@ var app = express.createServer(function(req, res) {
 			    try {
 			    	rawData = JSON.parse(rawData);
 
+			    	var currentHttpCallPosition = 0;
 			    	for (var i=0; i<rawData.length; i++)
 			    	{
 
@@ -67,23 +80,33 @@ var app = express.createServer(function(req, res) {
 		  					var rawData2 = '';
 		  					result2.on('data', (chunk2) => rawData2 += chunk2);
 		  					result2.on('end', () => {
-		  						rawData2 = JSON.parse(rawData2);
+		  						/*rawData2 = JSON.parse(rawData2);
 		  						imageData = rawData2['results']['bindings'][0]['image'];
+		  						merimee = rawData2['results']['bindings'][0]['merimee']['value'];
 		  						var imageUrl = '';
 		  						if (imageData)
 		  						{
 		  							imageUrl = imageData['value'];
-		  							setRawDataParameter(i, 'IMG', imageUrl);
+		  						}
+
+		  						for (var j=0; j<getRawData().length; j++)
+		  						{
+		  							if (merimee == getRawData()[j]['REF'])
+		  								setRawDataParameter(j, 'IMG', imageUrl);
+		  						}*/
+
+		  						currentHttpCallPosition++;
+		  						if (currentHttpCallPosition == getRawData().length)
+		  						{
+		  							rawData = JSON.stringify(getRawData());
+							      	res.write(rawData);
+									res.end();
 		  						}
 							});
 			    		}).on('error', (e) => {
 		  					console.log(`Got error: ${e.message}`);
 		  				});
 			    	}
-
-			    	rawData = JSON.stringify(rawData);
-			      	res.write(rawData);
-					res.end();
 			    } catch (e) {
 			      console.log(e.message);
 			    }
@@ -117,6 +140,11 @@ function afficheMessageErreurHTTP(resultat)
 function setRawDataParameter(position, key, valeur)
 {
 	rawData[position][key] = valeur;
+}
+
+function getRawData()
+{
+	return rawData;
 }
 
 app.listen(1337);

@@ -31,10 +31,10 @@
 <div ng-zone>
     <div *ngIf="!displayDetailMonuments">
         <div id="listeMonuments">
-            <span *ngFor="#monument of monuments" (click) = "afficherMonument(monument['REF'])">
-                    <img ng-src="monument['IMG']" alt="Image non existante" />
-                    <div #reference>{{ monument['REF'] }}</div>
-                    <div>{{ monument['TICO'] }}</div>
+            <span *ngFor="#currentmonument of monuments" (click) = "afficherMonument(currentmonument['REF'])">
+                    <img [src]="currentmonument['IMG']" alt="Image non existante" >
+                    <div #reference>{{ currentmonument['REF'] }}</div>
+                    <div>{{ currentmonument['TICO'] }}</div>
             </span>
         </div>
         <div id="fleches">
