@@ -6,6 +6,9 @@
     margin-top: 30px;
     padding: 20px 0px 50px 80px;
 }
+#detailsMonument a#lien-before {
+    color: white;
+}
 #icon-before {
     position: absolute;
     top: 20px;
