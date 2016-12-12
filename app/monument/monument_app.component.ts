@@ -16,7 +16,6 @@ export class MonumentAppComponent {
 
 	constructor(zone:NgZone) {
 	    this.zone = zone;
-            //this.monument = JSON.stringify(this.monument, null, 4); 
   	}
         
         creerProfil(){

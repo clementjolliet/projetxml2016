@@ -1,9 +1,15 @@
 #detailsMonument {
+    position: relative;
     background-color: rgba(128,128,128,0.7);
     color: white;
     border: 1px solid black;
     margin-top: 30px;
     padding: 20px 0px 50px 80px;
+}
+#icon-before {
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 #detailsMonument h3 {
     padding-left: 80px;
