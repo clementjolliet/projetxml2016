@@ -29,7 +29,7 @@
 </div>
 <div ng-zone id="listeMonuments">
     <span *ngFor="#monument of monuments">
-            <img src="{{monument['IMG']}}">
+            <img ng-src="monument['IMG']" alt="Image non existante" />
             <div>{{ monument['REF'] }}</div>
             <div>{{ monument['TICO'] }}</div>
     </span>
