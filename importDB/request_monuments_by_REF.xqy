@@ -15,13 +15,14 @@ declare option exist:serialize "method=json media-type=application/json";
 {
 let $resultat := 
 for $row in doc("merimee-MH.xml")/csv_data/row
+where fn:contains($row/REF, $search)
 return
     $row
         
 
 for $return in subsequence($resultat, $start, xs:integer($length) + 1)
 return
-    <json:value  json:array="true">
+    <json:value json:array="true">
         {$return/REF}
         {$return/ETUD}
         {$return/REG}

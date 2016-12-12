@@ -15,6 +15,7 @@ declare option exist:serialize "method=json media-type=application/json";
 {
 let $resultat := 
 for $row in doc("merimee-MH.xml")/csv_data/row
+where fn:contains($row/ADRS, $search)
 return
     $row
         

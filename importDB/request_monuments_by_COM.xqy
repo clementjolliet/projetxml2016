@@ -6,7 +6,7 @@ import module
     namespace request = "http://exist-db.org/xquery/request";
 
 declare variable $search := request:get-parameter("search", "");
-declare variable $start := request:get-parameter("start", 0);
+declare variable $start := request:get-parameter("start", 3);
 declare variable $length := request:get-parameter("length", count(doc("merimee-MH.xml")/csv_data/row));
 
 declare option exist:serialize "method=json media-type=application/json";
@@ -15,6 +15,7 @@ declare option exist:serialize "method=json media-type=application/json";
 {
 let $resultat := 
 for $row in doc("merimee-MH.xml")/csv_data/row
+where fn:contains($row/COM, $search)
 return
     $row
         
