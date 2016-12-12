@@ -11,7 +11,7 @@ System.register(["angular2/platform/browser", "./navigation_app.component"], fun
                 navigation_app_component_1 = navigation_app_component_1_1;
             }],
         execute: function() {
-            browser_1.bootstrap(navigation_app_component_1.AppComponent);
+            browser_1.bootstrap(navigation_app_component_1.NavigationAppComponent);
         }
     }
 });

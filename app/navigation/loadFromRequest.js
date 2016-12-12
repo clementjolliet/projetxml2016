@@ -4,11 +4,6 @@ $(document).ready(function(){
 
 });
 
-$("#listeMonuments").ready(function(){
-	afficheMonuments();
-	console.log(JSON.stringify(monuments));
-});
-
 function afficheMonuments()
 {
 	var searchBy = $('#searchBy').val();
@@ -22,7 +17,7 @@ function afficheMonuments()
 
 	// A changer en fonction de la page ou on est
 	var start = "0";
-	var length = "20";
+	var length = "12";
 
 	var url = 'http://localhost:1337/?searchBy='+searchBy+'&search='+inpSearch+'&start='+start+"&length="+length
 
@@ -33,8 +28,10 @@ function afficheMonuments()
 		success : function(res, statut){
 			monuments = res;
 
-			// A partir de l'array monuments, afficher les resultats
-			console.log(JSON.stringify(monuments));
+			for (var i=0; i<monuments.length; i++)
+			{
+				$('#listeMonuments ul').append('<li><img src="https://images.busit.com/apps/6_100.png"><span>Email</span><div>Wololo</div></li>');
+	        }
 		},
 		error : function(resultat, statut, erreur){
 

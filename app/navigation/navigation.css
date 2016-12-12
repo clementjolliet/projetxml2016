@@ -1,6 +1,6 @@
 .navbar select {
     background-color: #3f51b5;
-    height: 32px;
+    height: 40px;
 }
 
 .navbar-form.navbar-left {
@@ -9,6 +9,7 @@
 
 .navbar input, .navbar a {
     margin-left: 10px;
+    font-size: 14px;
 }
 
 #formRecherche {
@@ -19,4 +20,43 @@
 #formRecherche select {
     display: inline-block;
     margin-bottom: 20px;
+}
+
+#listeMonuments {
+  list-style: none;
+  margin-top: 20px;
+  box-sizing: border-box;
+  margin: 0;
+  text-align: center;
+  color: #858585;
+}
+
+#listeMonuments span {
+  display: inline-block;
+  height: 340px;
+  padding: 10px;
+  background-color:  rgba(255, 255, 255, 0.5);
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  margin: 10px;
+  width: 260px;
+  vertical-align: top;
+  position: relative;
+}
+
+#listeMonuments span img{
+  width: 220px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+#listeMonuments span span{
+  font-size: 16px;
 }
