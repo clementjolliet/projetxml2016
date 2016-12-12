@@ -20,7 +20,7 @@ return
     $row
         
 
-for $return in subsequence($resultat, $start, xs:integer($length) + 1)
+for $return in subsequence($resultat, $start, xs:integer($length))
 return
     <json:value>
         {$return/REF}

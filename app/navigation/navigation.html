@@ -29,6 +29,12 @@
 </div>
 <div ng-zone id="listeMonuments">
     <span *ngFor="#monument of monuments">
-            {{ monument['REF'] }}
+            <img src="{{monument['IMG']}}">
+            <div>{{ monument['REF'] }}</div>
+            <div>{{ monument['TICO'] }}</div>
     </span>
+</div>
+<div id="fleches">
+    <img (click)="pageMoins()" src="app/navigation/fleche_left.png">
+    <img (click)="pagePlus()" src="app/navigation/fleche_right.png">
 </div>

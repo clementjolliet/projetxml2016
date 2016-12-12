@@ -22,23 +22,36 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 function NavigationAppComponent(zone) {
                     this.monuments = [];
                     this.zone = zone;
+                    this.start = 1;
+                    this.length = 12;
                     this.obtenirMonuments("REF", "");
                 }
+                NavigationAppComponent.prototype.pagePlus = function () {
+                    this.start = this.start + this.length;
+                    this.obtenirMonuments(this.searchBy, this.inpSearch);
+                };
+                NavigationAppComponent.prototype.pageMoins = function () {
+                    this.start = this.start - this.length;
+                    if (this.start == 0)
+                        this.start = 0;
+                    this.obtenirMonuments(this.searchBy, this.inpSearch);
+                };
                 NavigationAppComponent.prototype.obtenirMonuments = function (searchBy, inpSearch) {
                     if (!searchBy)
                         searchBy = "";
                     if (!inpSearch)
                         inpSearch = "";
-                    // A changer en fonction de la page ou on est
-                    var start = "0";
-                    var length = "12";
-                    var url = 'http://localhost:1337/?searchBy=' + searchBy + '&search=' + inpSearch + '&start=' + start + "&length=" + length;
+                    this.searchBy = searchBy;
+                    this.inpSearch = inpSearch;
+                    var url = 'http://localhost:1337/?searchBy=' + searchBy + '&search=' + inpSearch + '&start=' + this.start + "&length=" + this.length;
                     var component = this;
                     $.ajax({
                         url: url,
                         dataType: 'json',
                         type: "GET",
                         success: function (res, statut) {
+                            if (res == "null")
+                                res = [];
                             component.zone.run(function () {
                                 component.monuments = res;
                             });
