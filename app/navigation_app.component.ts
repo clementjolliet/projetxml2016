@@ -18,6 +18,9 @@ export class NavigationAppComponent {
 	public searchBy;
 	public inpSearch;
 
+	public displayDetailMonuments = false;
+	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "" };
+
 	constructor(zone:NgZone) {
 	    this.zone = zone;
 
@@ -45,6 +48,8 @@ export class NavigationAppComponent {
 
 	obtenirMonuments(searchBy, inpSearch)
 	{
+		this.afficherListe();
+
 		if (!searchBy)
 			searchBy = "";
 
@@ -74,6 +79,31 @@ export class NavigationAppComponent {
 
 				console.log(resultat);
 	       	}
+		});
+	}
+
+	afficherMonument(reference)
+	{
+		var component = this;
+
+		for (var i=0; i<this.monuments.length; i++)
+		{
+			if (this.monuments[i]['REF'] == reference)
+			{
+				component.zone.run(() => {
+					this.monument = this.monuments[i];
+					this.displayDetailMonuments = true;
+	    		});
+			}
+		}
+	}
+
+	afficherListe()
+	{
+		var component = this;
+		
+		component.zone.run(() => {
+			this.displayDetailMonuments = false;
 		});
 	}
 }

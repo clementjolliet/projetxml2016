@@ -21,6 +21,8 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             NavigationAppComponent = (function () {
                 function NavigationAppComponent(zone) {
                     this.monuments = [];
+                    this.displayDetailMonuments = false;
+                    this.monument = { "REF": "", "ETUD": "", "REG": "", "DPT": "", "COM": "", "INSEE": "", "TICO": "", "ADRS": "", "STAT": "", "AFFE": "", "PPRO": "", "DPRO": "", "AUTR": "", "SCLE": "" };
                     this.zone = zone;
                     this.start = 1;
                     this.length = 12;
@@ -37,6 +39,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.obtenirMonuments(this.searchBy, this.inpSearch);
                 };
                 NavigationAppComponent.prototype.obtenirMonuments = function (searchBy, inpSearch) {
+                    this.afficherListe();
                     if (!searchBy)
                         searchBy = "";
                     if (!inpSearch)
@@ -59,6 +62,25 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         error: function (resultat, statut, erreur) {
                             console.log(resultat);
                         }
+                    });
+                };
+                NavigationAppComponent.prototype.afficherMonument = function (reference) {
+                    var _this = this;
+                    var component = this;
+                    for (var i = 0; i < this.monuments.length; i++) {
+                        if (this.monuments[i]['REF'] == reference) {
+                            component.zone.run(function () {
+                                _this.monument = _this.monuments[i];
+                                _this.displayDetailMonuments = true;
+                            });
+                        }
+                    }
+                };
+                NavigationAppComponent.prototype.afficherListe = function () {
+                    var _this = this;
+                    var component = this;
+                    component.zone.run(function () {
+                        _this.displayDetailMonuments = false;
                     });
                 };
                 NavigationAppComponent = __decorate([
