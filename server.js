@@ -53,7 +53,7 @@ var app = express.createServer(function(req, res) {
     
 
     // Appel HTTP pour effectuer la rechercher sur la BD
-    http.get(urlHTTP, (result) => {
+    var requeteHTTP1 = http.get(urlHTTP, (result) => {
 		  result.setEncoding('utf8');
 		  rawData = '';
 		  result.on('data', (chunk) => rawData += chunk);
@@ -62,63 +62,77 @@ var app = express.createServer(function(req, res) {
 			    	rawData = JSON.parse(rawData);
 
 			    	var currentHttpCallPosition = 0;
-			    	for (var i=0; i<rawData.length; i++)
-			    	{
 
-			    		monumentData = rawData[i];
-			    		var query = 'SELECT DISTINCT (GROUP_CONCAT(DISTINCT ?merimee; SEPARATOR = ", ") AS ?merimee) ?coords ?image WHERE { { SELECT DISTINCT ?item ?merimee WHERE { ?item (wdt:P1435/wdt:P279*) wd:Q916475. ?item p:P1435 ?heritage_statement. ?item wdt:P380 ?merimee. FILTER(REGEX(?merimee, "'+ monumentData['REF'] +'")) FILTER(NOT EXISTS { ?heritage_statement pq:P582 ?end. }) } } OPTIONAL { ?item wdt:P625 ?coords. } OPTIONAL { ?item wdt:P18 ?image. } SERVICE wikibase:label { bd:serviceParam wikibase:language "fr". } } GROUP BY ?item ?coords ?image';
+			    		var query = 'SELECT DISTINCT (GROUP_CONCAT(DISTINCT ?merimee; SEPARATOR = ", ") AS ?merimee) ?coords ?image WHERE { { SELECT DISTINCT ?item ?merimee WHERE { ?item (wdt:P1435/wdt:P279*) wd:Q916475. ?item p:P1435 ?heritage_statement. ?item wdt:P380 ?merimee. FILTER(REGEX(?merimee, "';
+			    		for (var i=0; i<rawData.length; i++)
+			    		{
+			    			if (i != rawData.length - 1)
+			    				query = query + rawData[i]['REF'] + '|';
+			    			else
+			    				query = query + rawData[i]['REF'];
+			    		}
+			    		query = query + '")) FILTER(NOT EXISTS { ?heritage_statement pq:P582 ?end. }) } } OPTIONAL { ?item wdt:P625 ?coords. } OPTIONAL { ?item wdt:P18 ?image. } SERVICE wikibase:label { bd:serviceParam wikibase:language "fr". } } GROUP BY ?item ?coords ?image';
 			    		var urlQuery = wdk.sparqlQuery(query);
-			    		https.get(urlQuery, (result2) => {
+
+			    		var requeteHTTP2 = https.get(urlQuery, (result2) => {
 			    			result2.setEncoding('utf8');
 		  					var rawData2 = '';
 		  					result2.on('data', (chunk2) => rawData2 += chunk2);
 		  					result2.on('end', () => {
-
 		  						rawData2 = JSON.parse(rawData2);
 
-		  						var imageData = rawData2['results']['bindings'][0]['image'];
-		  						var merimee = rawData2['results']['bindings'][0]['merimee']['value'];
-		  						var imageUrl = '';
-		  						if (imageData)
-		  						{
-		  							imageUrl = imageData['value'];
-		  						}
+		  						var resultatsRequete = rawData2['results']['bindings'];
 
-		  						var coordsData = rawData2['results']['bindings'][0]['coords'];
-		  						var lat = '';
-		  						var long = '';
-		  						if (coordsData)
-		  						{
-		  							var point = coordsData['value'];
-		  							var posParOuvrante = point.indexOf('(');
-		  							var posEspace = point.indexOf(' ');
-		  							var posParFermante = point.indexOf(')');
-		  							lat = point.substring(posParOuvrante + 1, posEspace);
-		  							long = point.substring(posEspace + 1 , posParFermante);
-		  						}
+		  						var nbResultatsRequete = resultatsRequete.length;
 
-		  						for (var j=0; j<getRawData().length; j++)
+		  						for(var i=0; i<nbResultatsRequete; i++)
 		  						{
-		  							if (merimee == getRawData()[j]['REF'])
-		  							{
-		  								setRawDataParameter(j, 'IMG', imageUrl);
-		  								setRawDataParameter(j, 'LAT', lat);
-		  								setRawDataParameter(j, 'LONG', long);
-		  							}
-		  						}
 
-		  						currentHttpCallPosition++;
-		  						if (currentHttpCallPosition == getRawData().length)
-		  						{
-		  							rawData = JSON.stringify(getRawData());
-							      	res.write(rawData);
-									res.end();
-		  						}
+			  						var imageData = resultatsRequete[i]['image'];
+			  						var merimee = resultatsRequete[i]['merimee']['value'];
+			  						var imageUrl = '';
+			  						if (imageData)
+			  						{
+			  							imageUrl = imageData['value'];
+			  						}
+
+			  						var coordsData = resultatsRequete[i]['coords'];
+			  						var lat = '';
+			  						var long = '';
+			  						if (coordsData)
+			  						{
+			  							var point = coordsData['value'];
+			  							var posParOuvrante = point.indexOf('(');
+			  							var posEspace = point.indexOf(' ');
+			  							var posParFermante = point.indexOf(')');
+			  							lat = point.substring(posParOuvrante + 1, posEspace);
+			  							long = point.substring(posEspace + 1 , posParFermante);
+			  						}
+
+			  						for (var j=0; j<getRawData().length; j++)
+			  						{
+			  							if (merimee == getRawData()[j]['REF'])
+			  							{
+			  								setRawDataParameter(j, 'IMG', imageUrl);
+			  								setRawDataParameter(j, 'LAT', lat);
+			  								setRawDataParameter(j, 'LONG', long);
+			  							}
+			  						}
+
+			  						currentHttpCallPosition++;
+			  						if (currentHttpCallPosition == getRawData().length)
+			  						{
+			  							rawData = JSON.stringify(getRawData());
+			  							requeteHTTP1.end();
+			  							requeteHTTP2.end();
+								      	res.write(rawData);
+										res.end();
+			  						}
+			  					}
 							});
 			    		}).on('error', (e) => {
 		  					console.log(`Got error: ${e.message}`);
 		  				});
-			    	}
 			    } catch (e) {
 			      console.log(e.message);
 			    }
