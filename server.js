@@ -16,17 +16,6 @@ try {
 }
 
 var app = express.createServer(function(req, res) {
- 
-	app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc) 
-	 
-	var limiter = new RateLimit({
-	  windowMs: 15*60*1000, // 15 minutes 
-	  max: 100, // limit each IP to 100 requests per windowMs 
-	  delayMs: 0 // disable delaying - full speed until the max limit is reached 
-	});
-	 
-	//  apply to all requests 
-	app.use(limiter);
 
 	// Récupération des paramètres de l'url
     var params = querystring.parse(url.parse(req.url).query);
@@ -34,14 +23,18 @@ var app = express.createServer(function(req, res) {
     // Header de la réponse
     res.writeHead(200, {"Content-Type": "text/json", 'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Methods' : 'PUT, GET, POST, DELETE, OPTIONS', 'Access-Control-Allow-Headers' : 'Content-Type'});
 
+    // Paramètre searchBy
     var searchBy = 'REF';
 
     if ('searchBy' in params && params['searchBy'] != "")
     {
     	searchBy = params['searchBy'];
     }
+
+    // Url de la requete vers la base Exist
     var urlHTTP = 'http://localhost:8080/exist/rest/db/request_monuments_by_' + searchBy + '.xqy?';
 
+    // Paramètre search
     if ('search' in params && params['search'] != "") 
     {
         urlHTTP += 'search=' + params['search'] + '&';
@@ -80,20 +73,38 @@ var app = express.createServer(function(req, res) {
 		  					var rawData2 = '';
 		  					result2.on('data', (chunk2) => rawData2 += chunk2);
 		  					result2.on('end', () => {
+
 		  						rawData2 = JSON.parse(rawData2);
-		  						imageData = rawData2['results']['bindings'][0]['image'];
-		  						merimee = rawData2['results']['bindings'][0]['merimee']['value'];
+
+		  						var imageData = rawData2['results']['bindings'][0]['image'];
+		  						var merimee = rawData2['results']['bindings'][0]['merimee']['value'];
 		  						var imageUrl = '';
 		  						if (imageData)
 		  						{
 		  							imageUrl = imageData['value'];
-		  							console.log(imageUrl);
+		  						}
+
+		  						var coordsData = rawData2['results']['bindings'][0]['coords'];
+		  						var lat = '';
+		  						var long = '';
+		  						if (coordsData)
+		  						{
+		  							var point = coordsData['value'];
+		  							var posParOuvrante = point.indexOf('(');
+		  							var posEspace = point.indexOf(' ');
+		  							var posParFermante = point.indexOf(')');
+		  							lat = point.substring(posParOuvrante + 1, posEspace);
+		  							long = point.substring(posEspace + 1 , posParFermante);
 		  						}
 
 		  						for (var j=0; j<getRawData().length; j++)
 		  						{
 		  							if (merimee == getRawData()[j]['REF'])
+		  							{
 		  								setRawDataParameter(j, 'IMG', imageUrl);
+		  								setRawDataParameter(j, 'LAT', lat);
+		  								setRawDataParameter(j, 'LONG', long);
+		  							}
 		  						}
 
 		  						currentHttpCallPosition++;
