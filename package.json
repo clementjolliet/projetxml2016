@@ -2,10 +2,10 @@
   "name": "merimhee",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "start": "concurrent \"npm run tsc:w\" \"node server.js\" ",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
-    "lite": "lite-server",
+    "lite": "node",
     "typings": "typings",
     "postinstall": "typings install"
   },

@@ -61,7 +61,7 @@ export class NavigationAppComponent {
 		this.searchBy = searchBy;
 		this.inpSearch = inpSearch;
 
-		var url = 'http://localhost:1337/?searchBy='+searchBy+'&search='+inpSearch+'&start='+this.start+"&length="+this.length;
+		var url = 'http://localhost:1337/api?searchBy='+searchBy+'&search='+inpSearch+'&start='+this.start+"&length="+this.length;
 
 		var component = this;
 
