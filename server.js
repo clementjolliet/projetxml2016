@@ -133,7 +133,7 @@ function afficheMessageErreurHTTP(resultat)
 	const statusCode = result.statusCode;
 	const contentType = result.headers['content-type'];
 
-	let error;
+	var error;
 		  if (statusCode !== 200) {
 		    error = new Error(`Request Failed.\n` +
 		                      `Status Code: ${statusCode}`);
