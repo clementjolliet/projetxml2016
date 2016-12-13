@@ -102,6 +102,9 @@
     text-decoration: underline;
 }
 
-.sebm-google-map-container {
-      height: 300px;
+circle {
+  fill: yellowgreen;
+  stroke: #655;
+  stroke-width: 50;
+  stroke-dasharray: 60 158; /* 2π × 25 ≈ 158 */
 }

@@ -20,7 +20,8 @@ export class NavigationAppComponent {
 
 	public display = "liste";
 	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "", "IMG" : "", "LAT" : "48.866667", "LONG" : "2.333333"};
-
+	public radius = 40;
+	
 	constructor(zone:NgZone) {
 	    this.zone = zone;
 
