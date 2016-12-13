@@ -19,7 +19,7 @@ export class NavigationAppComponent {
 	public inpSearch;
 
 	public displayDetailMonuments = false;
-	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "", "IMG" : ""};
+	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "", "IMG" : "", "LAT" : "4", "LONG" : "51"};
 
 	constructor(zone:NgZone) {
 	    this.zone = zone;
@@ -28,6 +28,8 @@ export class NavigationAppComponent {
 	    this.length = 12;
 
 	    this.obtenirMonuments("REF", "");
+
+	    initialisation(this.monument['LAT'], this.monument['LONG']);
   	}
 
   	pagePlus()
@@ -86,14 +88,13 @@ export class NavigationAppComponent {
 	{
 		var component = this;
 
-		var component = this;
-
 		for (var i=0; i<this.monuments.length; i++)
 		{
 			if (this.monuments[i]['REF'] == reference)
 			{
 				component.zone.run(() => {
 					this.monument = this.monuments[i];
+					initialisation(this.monument['LAT'], this.monument['LONG']);
 	    		});
 			}
 		}

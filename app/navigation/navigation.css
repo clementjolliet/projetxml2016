@@ -101,3 +101,7 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.sebm-google-map-container {
+      height: 300px;
+}

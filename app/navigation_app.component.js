@@ -22,11 +22,12 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 function NavigationAppComponent(zone) {
                     this.monuments = [];
                     this.displayDetailMonuments = false;
-                    this.monument = { "REF": "", "ETUD": "", "REG": "", "DPT": "", "COM": "", "INSEE": "", "TICO": "", "ADRS": "", "STAT": "", "AFFE": "", "PPRO": "", "DPRO": "", "AUTR": "", "SCLE": "", "IMG": "" };
+                    this.monument = { "REF": "", "ETUD": "", "REG": "", "DPT": "", "COM": "", "INSEE": "", "TICO": "", "ADRS": "", "STAT": "", "AFFE": "", "PPRO": "", "DPRO": "", "AUTR": "", "SCLE": "", "IMG": "", "LAT": "4", "LONG": "51" };
                     this.zone = zone;
                     this.start = 1;
                     this.length = 12;
                     this.obtenirMonuments("REF", "");
+                    initialisation(this.monument['LAT'], this.monument['LONG']);
                 }
                 NavigationAppComponent.prototype.pagePlus = function () {
                     this.start = this.start + this.length;
@@ -67,11 +68,11 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                 NavigationAppComponent.prototype.afficherMonument = function (reference) {
                     var _this = this;
                     var component = this;
-                    var component = this;
                     for (var i = 0; i < this.monuments.length; i++) {
                         if (this.monuments[i]['REF'] == reference) {
                             component.zone.run(function () {
                                 _this.monument = _this.monuments[i];
+                                initialisation(_this.monument['LAT'], _this.monument['LONG']);
                             });
                         }
                     }

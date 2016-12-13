@@ -7,9 +7,8 @@ try {
 	var url = require('url');
 	var fs = require("fs");
 	var express = require('express');
-	var wdk = require('wikidata-sdk')
+	var wdk = require('wikidata-sdk');
 	var util = require('util');
-	var RateLimit = require('express-rate-limit');
 } catch (ex) {
     handleErr(ex);
 	console.log("Echec chargement framework node");
@@ -105,8 +104,8 @@ var app = express.createServer(function(req, res) {
 			  							var posParOuvrante = point.indexOf('(');
 			  							var posEspace = point.indexOf(' ');
 			  							var posParFermante = point.indexOf(')');
-			  							lat = point.substring(posParOuvrante + 1, posEspace);
-			  							long = point.substring(posEspace + 1 , posParFermante);
+			  							long = point.substring(posParOuvrante + 1, posEspace);
+			  							lat = point.substring(posEspace + 1 , posParFermante);
 			  						}
 
 			  						for (var j=0; j<getRawData().length; j++)
