@@ -3,7 +3,7 @@
     height: 40px;
 }
 
-.navbar-form.navbar-left {
+.navbar-form.navbar-left, .navbar-form.navbar-right {
     margin-top: 8px;
 }
 
