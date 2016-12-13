@@ -19,7 +19,7 @@ export class NavigationAppComponent {
 	public inpSearch;
 
 	public displayDetailMonuments = false;
-	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "", "IMG" : "", "LAT" : "4", "LONG" : "51"};
+	public monument = { "REF" : "", "ETUD" : "", "REG" : "", "DPT" : "", "COM" : "", "INSEE" : "", "TICO" : "", "ADRS" : "", "STAT" : "", "AFFE" : "", "PPRO" : "", "DPRO" : "", "AUTR" : "", "SCLE" : "", "IMG" : "", "LAT" : "48.866667", "LONG" : "2.333333"};
 
 	constructor(zone:NgZone) {
 	    this.zone = zone;
