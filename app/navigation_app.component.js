@@ -23,6 +23,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     this.monuments = [];
                     this.display = "liste";
                     this.monument = { "REF": "", "ETUD": "", "REG": "", "DPT": "", "COM": "", "INSEE": "", "TICO": "", "ADRS": "", "STAT": "", "AFFE": "", "PPRO": "", "DPRO": "", "AUTR": "", "SCLE": "", "IMG": "", "LAT": "48.866667", "LONG": "2.333333" };
+                    this.radius = 40;
                     this.zone = zone;
                     this.start = 1;
                     this.length = 12;
