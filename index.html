@@ -3,35 +3,42 @@
     <head>
 
         <style>
-              html, body {
+            html, body {
                 height: 100%;
                 margin: 0;
                 padding: 0
-              }
-              #EmplacementDeMaCarte {
+            }
+            #EmplacementDeMaCarte {
                 height: 300px;
                 margin-top: 30px;
-              }
-            </style>
+            }
+        </style>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjc3PraqEFlK6fjnOvHF1CKBVCtRd1z2M"></script>
-       <script>
-                function initialisation(lat, long){
-                  var optionsCarte = {
-                  zoom: 13,
-                  center: new google.maps.LatLng(lat, long)
+        <script>
+            function initialisation(lat, long) {
+                var optionsCarte = {
+                    zoom: 13,
+                    center: new google.maps.LatLng(lat, long)
                 }
                 var maCarte = new google.maps.Map(document.getElementById("EmplacementDeMaCarte"), optionsCarte);
-              }
-          </script>
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, long),
+                    map: maCarte,
+                    title: 'Position monument'
+                });
+
+            }
+        </script>
 
         <title>Bienvenue sur Merimee</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        
+
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.33.3/es6-shim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.20/system-polyfills.js"></script>
         <script src="https://code.angularjs.org/2.0.0-beta.6/angular2-polyfills.js"></script>
@@ -60,33 +67,33 @@
 
     </head>
     <body style='background-image: url("/app/navigation/background.jpg"); background-repeat: no-repeat;background-size:cover; background-attachment:fixed; '>
-        
+
         <script>
-        
-        $(document).ready(function () {
-            $.material.init();
-        });
+
+            $(document).ready(function () {
+                $.material.init();
+            });
 
 
-    </script>
+        </script>
 
     <navig_app>Loading... --></navig_app>
-    
+
     <div class="container">
         <!--<div class="col-xs-3"></div>-->
         <div id="EmplacementDeMaCarte" style="display:block" class="col-xs-12">
             <noscript>
-              <p>Attention : </p>
-              <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
-              <p>Or, il semble que JavaScript est désactivé ou qu'il ne soit pas supporté par votre navigateur.</p>
-              <p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis essayez à nouveau.</p>
+            <p>Attention : </p>
+            <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
+            <p>Or, il semble que JavaScript est désactivé ou qu'il ne soit pas supporté par votre navigateur.</p>
+            <p>Pour afficher Google Maps, activez JavaScript en modifiant les options de votre navigateur, puis essayez à nouveau.</p>
             </noscript>
         </div>
         <!--<div class="col-xs-3"></div>-->
     </div>
 
 
-    
+
 
 </body>
 
