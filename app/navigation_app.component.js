@@ -21,7 +21,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
             NavigationAppComponent = (function () {
                 function NavigationAppComponent(zone) {
                     this.monuments = [];
-                    this.displayDetailMonuments = false;
+                    this.display = "liste";
                     this.monument = { "REF": "", "ETUD": "", "REG": "", "DPT": "", "COM": "", "INSEE": "", "TICO": "", "ADRS": "", "STAT": "", "AFFE": "", "PPRO": "", "DPRO": "", "AUTR": "", "SCLE": "", "IMG": "", "LAT": "48.866667", "LONG": "2.333333" };
                     this.zone = zone;
                     this.start = 1;
@@ -77,14 +77,23 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         }
                     }
                     component.zone.run(function () {
-                        _this.displayDetailMonuments = true;
+                        _this.display = "monument";
                     });
                 };
                 NavigationAppComponent.prototype.afficherListe = function () {
                     var _this = this;
                     var component = this;
                     component.zone.run(function () {
-                        _this.displayDetailMonuments = false;
+                        _this.display = "liste";
+                        initialisation('48.866667', '2.3333333');
+                    });
+                };
+                NavigationAppComponent.prototype.afficherStats = function () {
+                    var _this = this;
+                    var component = this;
+                    component.zone.run(function () {
+                        _this.display = "stats";
+                        initialisation('48.866667', '2.3333333');
                     });
                 };
                 NavigationAppComponent = __decorate([

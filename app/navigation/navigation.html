@@ -32,7 +32,7 @@
 </div>
 
 <div ng-zone>
-    <div *ngIf="!displayDetailMonuments">
+    <div *ngIf='display=="liste"'>
         <div id="listeMonuments">
             <span *ngFor="#currentmonument of monuments" (click) = "afficherMonument(currentmonument['REF'])">
                     <img [src]="currentmonument['IMG']" alt="Image non existante" >
@@ -46,10 +46,32 @@
         </div>
     </div>
 
+    <div *ngIf='display=="monument"'>
+        <div class="col-xs-4"></div>
+        <div class="col-xs-4" id="detailsMonument">
+            <a (click) = "afficherListe()" href='javascript:void(0)' id='lien-before'><i class="material-icons" id='icon-before'>navigate_before</i></a>
+            <h3>Fiche de monument</h3>
+            <p style="text-align:center"><img [src]="monument['IMG']" alt="Image non existante" style="width: 200px; margin-left:-20%"></p>
+            <p><span>Référence :</span> {{ monument['REF'] }}</p>
+            <p><span>Type d'étude :</span> {{ monument['ETUD'] }}</p>
+            <p><span>Région :</span> {{ monument['REG'] }}</p>
+            <p><span>Département :</span> {{ monument['DPT'] }}</p>
+            <p><span>Communauté :</span> {{ monument['COM'] }} </p>
+            <p><span>Code INSEE :</span> {{ monument['INSEE'] }} </p>
+            <p><span>Appellation courante :</span> {{ monument['TICO'] }} </p>
+            <p><span>Adresse :</span> {{ monument['ADRS'] }} </p>
+            <p><span>Statut :</span> {{ monument['STAT'] }} </p>
+            <p><span>Affectataire :</span> {{ monument['AFFE'] }} </p>
+            <p><span>Précisions sur la protection :</span> {{ monument['PPRO'] }} </p>
+            <p><span>Date de protection : </span> {{ monument['DPRO'] }} </p>
+            <p><span>Architecte : </span> {{ monument['AUTR'] }} </p>
+            <p><span>Période de construction :</span> {{ monument['SCLE'] }} </p>
+            <p><span>Latitude :</span> {{ monument['LAT'] }} </p>  
+            <p><span>Longitude :</span> {{ monument['LONG'] }} </p>  
+        </div>
+    </div>
 
-
-
-    <div *ngIf="displayDetailMonuments">
+    <div *ngIf='display=="stats"'>
         <div class="col-xs-4"></div>
         <div class="col-xs-4" id="detailsMonument">
             <a (click) = "afficherListe()" href='javascript:void(0)' id='lien-before'><i class="material-icons" id='icon-before'>navigate_before</i></a>
