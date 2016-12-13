@@ -80,20 +80,21 @@ var app = express.createServer(function(req, res) {
 		  					var rawData2 = '';
 		  					result2.on('data', (chunk2) => rawData2 += chunk2);
 		  					result2.on('end', () => {
-		  						/*rawData2 = JSON.parse(rawData2);
+		  						rawData2 = JSON.parse(rawData2);
 		  						imageData = rawData2['results']['bindings'][0]['image'];
 		  						merimee = rawData2['results']['bindings'][0]['merimee']['value'];
 		  						var imageUrl = '';
 		  						if (imageData)
 		  						{
 		  							imageUrl = imageData['value'];
+		  							console.log(imageUrl);
 		  						}
 
 		  						for (var j=0; j<getRawData().length; j++)
 		  						{
 		  							if (merimee == getRawData()[j]['REF'])
 		  								setRawDataParameter(j, 'IMG', imageUrl);
-		  						}*/
+		  						}
 
 		  						currentHttpCallPosition++;
 		  						if (currentHttpCallPosition == getRawData().length)
