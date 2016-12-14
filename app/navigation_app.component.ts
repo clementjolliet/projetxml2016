@@ -132,7 +132,7 @@ export class NavigationAppComponent {
                 var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
 		var component = this;
 
-                var libelle = {"regions" : "Affichage des régions", "departements" : "Affichage des départements"};
+                var libelle = {"communautes" : "Affichage des communautés", "regions" : "Affichage des régions", "departements" : "Affichage des départements"};
 
 		$.ajax({
 			url : url,
