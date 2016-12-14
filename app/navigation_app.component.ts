@@ -116,7 +116,7 @@ export class NavigationAppComponent {
                 $("#s").hide();
 	}
 
-	afficherStats()
+	afficherStatsDepartements()
 	{
 		var component = this;
 		
@@ -125,8 +125,34 @@ export class NavigationAppComponent {
 			initialisation('48.866667', '2.3333333');
                         
 		});
-            //initGraph(lesKeys, lesData);
-            $("#EmplacementDeMaCarte").hide();
-            $("#s").show();
+
+		var url = 'http://localhost:1337/api/getStats?searchBy=regions';
+
+		var component = this;
+
+		$.ajax({
+			url : url,
+			dataType : 'json',
+			type: "GET",
+			success : function(res, statut){
+				
+				var lesKeys = new Array();
+				var lesData = new Array();
+				for (var i=0; i<res.length; i++)
+				{
+					lesKeys.push(res[i]["data"]);
+					lesData.push(parseInt(res[i]["nombre"]));
+				}
+
+				initGraph(lesKeys, lesData);
+				$("#s").show();
+			},
+			error : function(resultat, statut, erreur){
+
+				console.log(resultat);
+	       	}
+		});
+
+        $("#EmplacementDeMaCarte").hide();
 	}
 }

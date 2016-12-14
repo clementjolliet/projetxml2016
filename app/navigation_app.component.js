@@ -90,16 +90,34 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     });
                     $("#s").hide();
                 };
-                NavigationAppComponent.prototype.afficherStats = function () {
+                NavigationAppComponent.prototype.afficherStatsDepartements = function () {
                     var _this = this;
                     var component = this;
                     component.zone.run(function () {
                         _this.display = "stats";
                         initialisation('48.866667', '2.3333333');
                     });
-                    //initGraph(lesKeys, lesData);
+                    var url = 'http://localhost:1337/api/getStats?searchBy=regions';
+                    var component = this;
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: "GET",
+                        success: function (res, statut) {
+                            var lesKeys = new Array();
+                            var lesData = new Array();
+                            for (var i = 0; i < res.length; i++) {
+                                lesKeys.push(res[i]["data"]);
+                                lesData.push(parseInt(res[i]["nombre"]));
+                            }
+                            initGraph(lesKeys, lesData);
+                            $("#s").show();
+                        },
+                        error: function (resultat, statut, erreur) {
+                            console.log(resultat);
+                        }
+                    });
                     $("#EmplacementDeMaCarte").hide();
-                    $("#s").show();
                 };
                 NavigationAppComponent = __decorate([
                     core_1.Component({
