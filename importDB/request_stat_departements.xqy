@@ -8,7 +8,7 @@ declare option exist:serialize "method=json media-type=application/json";
 for $v in doc("merimee-MH.xml")/csv_data/row
   let $u:=$v/DPT
 group by $u
-order by $u
+order by count($v/REF) descending
 return
 (
   <json:value json:array="true">
