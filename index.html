@@ -12,6 +12,14 @@
                 height: 300px;
                 margin-top: 30px;
             }
+            #con {
+                resize:both;
+                overflow:hidden;
+                display:inline-block;
+                width: 200px !important;
+                height: 200px !important;
+                padding:0.5em;
+            }
         </style>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjc3PraqEFlK6fjnOvHF1CKBVCtRd1z2M"></script>
@@ -30,6 +38,66 @@
                 });
 
             }
+
+            function makeSVG(tag, attrs) {
+                var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+                for (var k in attrs)
+                    if (attrs.hasOwnProperty(k))
+                        el.setAttribute(k, attrs[k]);
+                return el;
+            }
+
+            function drawArcs(paper, pieData) {
+                var total = pieData.reduce(function (accu, that) {
+                    return that + accu;
+                }, 0);
+                var sectorAngleArr = pieData.map(function (v) {
+                    return 360 * v / total;
+                });
+
+                var startAngle = 0;
+                var endAngle = 0;
+                for (var i = 0; i < sectorAngleArr.length; i++) {
+                    startAngle = endAngle;
+                    endAngle = startAngle + sectorAngleArr[i];
+
+                    var x1, x2, y1, y2;
+
+                    x1 = parseInt(Math.round(200 + 195 * Math.cos(Math.PI * startAngle / 180)));
+                    y1 = parseInt(Math.round(200 + 195 * Math.sin(Math.PI * startAngle / 180)));
+
+                    x2 = parseInt(Math.round(200 + 195 * Math.cos(Math.PI * endAngle / 180)));
+                    y2 = parseInt(Math.round(200 + 195 * Math.sin(Math.PI * endAngle / 180)));
+
+                    var d = "M200,200  L" + x1 + "," + y1 + "  A195,195 0 " +
+                            ((endAngle - startAngle > 180) ? 1 : 0) + ",1 " + x2 + "," + y2 + " z";
+                    //alert(d); // enable to see coords as they are displayed
+                    var c = parseInt(i / sectorAngleArr.length * 360);
+                    var arc = makeSVG("path", {d: d, fill: "hsl(" + c + ", 66%, 50%)"});
+                    paper.appendChild(arc);
+                    arc.onclick = (function (originalData) {
+                        return function (event) {
+                            alert("Associated pie piece data: " + originalData);
+                        }
+                    })(pieData[i]);
+                }
+            }
+
+            function initGraph() {
+                console.log("tatayoyo");
+                var svgdoc = document.getElementById("s");
+                drawArcs(svgdoc, [52, 15, 20, 80]); // here is the pie chart data
+
+                // You can attach additional content (from e.g. AJAX) like this:
+                var parser = new DOMParser();
+                var docToEmbed = parser.parseFromString(
+                        "<svg xmlns='http://www.w3.org/2000/svg'><text x='50' y='50' fill='black'>hi</text></svg>",
+                        "image/svg+xml");
+                Array.prototype.slice.call(docToEmbed.documentElement.childNodes).forEach(function (elem) {
+                    svgdoc.appendChild(document.importNode(elem, true));
+                });
+            }
+
         </script>
 
         <title>Bienvenue sur Merimee</title>
@@ -81,7 +149,7 @@
 
     <div class="container">
         <!--<div class="col-xs-3"></div>-->
-		<div id="EmplacementDeMaCarte" style="display:block" class="col-xs-12">
+        <div id="EmplacementDeMaCarte" style="display:block" class="col-xs-12">
             <noscript>
             <p>Attention : </p>
             <p>Afin de pouvoir utiliser Google Maps, JavaScript doit être activé.</p>
@@ -91,7 +159,18 @@
         </div>
         <!--<div class="col-xs-3"></div>-->
     </div>
-
+    <div id="con">
+        <!-- the div container is of course optional. It is used with 
+             {width,height}="100%" below to make the chart resizable. -->
+        <svg width="100%" height="100%" id="s"
+             xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400">
+        <style type="text/css">
+            path:hover {
+                opacity: 0.8;
+            }
+        </style>
+        </svg>
+    </div>
 
 
 

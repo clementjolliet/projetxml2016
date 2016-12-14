@@ -88,6 +88,8 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         _this.display = "liste";
                         initialisation('48.866667', '2.3333333');
                     });
+                    console.log("tto");
+                    $("#s").hide();
                 };
                 NavigationAppComponent.prototype.afficherStats = function () {
                     var _this = this;
@@ -96,6 +98,8 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         _this.display = "stats";
                         initialisation('48.866667', '2.3333333');
                     });
+                    initGraph();
+                    $("#s").show();
                 };
                 NavigationAppComponent = __decorate([
                     core_1.Component({

@@ -113,6 +113,8 @@ export class NavigationAppComponent {
 			this.display = "liste";
 			initialisation('48.866667', '2.3333333');
 		});
+                console.log("tto");
+                $("#s").hide();
 	}
 
 	afficherStats()
@@ -122,6 +124,9 @@ export class NavigationAppComponent {
 		component.zone.run(() => {
 			this.display = "stats";
 			initialisation('48.866667', '2.3333333');
+                        
 		});
+            initGraph();
+            $("#s").show();
 	}
 }
