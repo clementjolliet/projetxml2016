@@ -89,16 +89,19 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         initialisation('48.866667', '2.3333333');
                     });
                     $("#s").hide();
+                    $("#les_btns").hide();
                 };
-                NavigationAppComponent.prototype.afficherStatsDepartements = function () {
+                NavigationAppComponent.prototype.afficherStats = function (typeStat) {
                     var _this = this;
                     var component = this;
                     component.zone.run(function () {
                         _this.display = "stats";
                         initialisation('48.866667', '2.3333333');
                     });
-                    var url = 'http://localhost:1337/api/getStats?searchBy=regions';
+                    //var url = 'http://localhost:1337/api/getStats?searchBy=regions';
+                    var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
                     var component = this;
+                    var libelle = { "regions": "Affichage des régions", "departements": "Affichage des départements" };
                     $.ajax({
                         url: url,
                         dataType: 'json',
@@ -110,8 +113,9 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                                 lesKeys.push(res[i]["data"]);
                                 lesData.push(parseInt(res[i]["nombre"]));
                             }
-                            initGraph(lesKeys, lesData);
+                            initGraph(libelle[typeStat], lesKeys, lesData);
                             $("#s").show();
+                            $("#les_btns").show();
                         },
                         error: function (resultat, statut, erreur) {
                             console.log(resultat);

@@ -114,9 +114,10 @@ export class NavigationAppComponent {
 			initialisation('48.866667', '2.3333333');
 		});
                 $("#s").hide();
+                $("#les_btns").hide();
 	}
 
-	afficherStatsDepartements()
+	afficherStats(typeStat)
 	{
 		var component = this;
 		
@@ -126,9 +127,11 @@ export class NavigationAppComponent {
                         
 		});
 
-		var url = 'http://localhost:1337/api/getStats?searchBy=regions';
-
+		//var url = 'http://localhost:1337/api/getStats?searchBy=regions';
+                var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
 		var component = this;
+
+                var libelle = {"regions" : "Affichage des régions", "departements" : "Affichage des départements"};
 
 		$.ajax({
 			url : url,
@@ -144,8 +147,9 @@ export class NavigationAppComponent {
 					lesData.push(parseInt(res[i]["nombre"]));
 				}
 
-				initGraph(lesKeys, lesData);
+				initGraph(libelle[typeStat], lesKeys, lesData);
 				$("#s").show();
+                                $("#les_btns").show();
 			},
 			error : function(resultat, statut, erreur){
 
