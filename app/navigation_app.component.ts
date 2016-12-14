@@ -119,7 +119,7 @@ export class NavigationAppComponent {
                 //$("#EmplacementDeMaCarte").hide();
 	}
 
-	afficherStats(typeStat)
+	afficherStats(nbResultats, typeStat)
 	{
 		var component = this;
 		
@@ -129,10 +129,10 @@ export class NavigationAppComponent {
                         
 		});
 
-                var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
+        var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat + '&number='+nbResultats;
 		var component = this;
 
-                var libelle = {"communautes" : "Affichage des communautés", "regions" : "Affichage des régions", "departements" : "Affichage des départements"};
+        var libelle = {"communautes" : "Affichage des communautés", "regions" : "Affichage des régions", "departements" : "Affichage des départements"};
 
 		$.ajax({
 			url : url,

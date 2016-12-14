@@ -93,14 +93,14 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                     });
                     //$("#EmplacementDeMaCarte").hide();
                 };
-                NavigationAppComponent.prototype.afficherStats = function (typeStat) {
+                NavigationAppComponent.prototype.afficherStats = function (nbResultats, typeStat) {
                     var _this = this;
                     var component = this;
                     component.zone.run(function () {
                         _this.display = "stats";
                         initialisation('48.866667', '2.3333333');
                     });
-                    var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
+                    var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat + '&number=' + nbResultats;
                     var component = this;
                     var libelle = { "communautes": "Affichage des communautés", "regions": "Affichage des régions", "departements": "Affichage des départements" };
                     $.ajax({

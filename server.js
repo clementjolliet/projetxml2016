@@ -206,6 +206,12 @@ var app = express.createServer(function(req, res) {
 		    	searchBy = params['searchBy'];
 		    }
 
+		    number = 10;
+    		if ('number' in params && params['number'] != "")
+		    {
+		    	number = parseInt(params['number']);
+		    }
+
 		    var urlHTTP = 'http://localhost:8080/exist/rest/db/request_stat_';
 
 		   	// Url de la requete vers la base Exist
@@ -217,7 +223,15 @@ var app = express.createServer(function(req, res) {
 				  rawData = '';
 				  result.on('data', (chunk) => rawData += chunk);
 				  result.on('end', () => {
-				  		res.write(rawData);
+				  		rawData = JSON.parse(rawData);
+				  		rawDataResult = [];
+
+				  		for (var i=0; i<number; i++)
+				  		{
+				  			rawDataResult[i] = rawData[i];
+				  		}
+
+				  		res.write(JSON.stringify(rawDataResult));
 						res.end();
 				  });
 			});
