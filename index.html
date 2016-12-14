@@ -19,8 +19,8 @@
                 resize:both;
                 overflow:hidden;
                 display:inline-block;
-                width: 400px !important;
-                height: 400px !important;
+                width: 800px !important;
+                height: 800px !important;
                 padding:0.5em;
             }
         </style>
@@ -82,7 +82,8 @@
                     arc.onclick = (function (originalData, originalKey) {
                         return function (event) {
                             
-                            alert("Valeur de " + originalKey + ": " + originalData);
+                            //alert("Valeur de " + originalKey + ": " + originalData);
+                            alert("Il y a " + originalData + " monuments dans " + originalKey);
                         }
                     })(pieData[i], pieKey[i]);
                 }
