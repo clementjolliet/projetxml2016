@@ -62,7 +62,7 @@ export class NavigationAppComponent {
 		this.searchBy = searchBy;
 		this.inpSearch = inpSearch;
 
-		var url = 'http://localhost:1337/api?searchBy='+searchBy+'&search='+inpSearch+'&start='+this.start+"&length="+this.length;
+		var url = 'http://localhost:1337/api/getMonuments?searchBy='+searchBy+'&search='+inpSearch+'&start='+this.start+"&length="+this.length;
 
 		var component = this;
 
@@ -113,7 +113,6 @@ export class NavigationAppComponent {
 			this.display = "liste";
 			initialisation('48.866667', '2.3333333');
 		});
-                console.log("tto");
                 $("#s").hide();
 	}
 
@@ -126,7 +125,8 @@ export class NavigationAppComponent {
 			initialisation('48.866667', '2.3333333');
                         
 		});
-            initGraph();
+            //initGraph(lesKeys, lesData);
+            $("#EmplacementDeMaCarte").hide();
             $("#s").show();
 	}
 }

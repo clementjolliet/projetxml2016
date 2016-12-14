@@ -48,7 +48,7 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         inpSearch = "";
                     this.searchBy = searchBy;
                     this.inpSearch = inpSearch;
-                    var url = 'http://localhost:1337/api?searchBy=' + searchBy + '&search=' + inpSearch + '&start=' + this.start + "&length=" + this.length;
+                    var url = 'http://localhost:1337/api/getMonuments?searchBy=' + searchBy + '&search=' + inpSearch + '&start=' + this.start + "&length=" + this.length;
                     var component = this;
                     $.ajax({
                         url: url,
@@ -88,7 +88,6 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         _this.display = "liste";
                         initialisation('48.866667', '2.3333333');
                     });
-                    console.log("tto");
                     $("#s").hide();
                 };
                 NavigationAppComponent.prototype.afficherStats = function () {
@@ -98,7 +97,8 @@ System.register(["angular2/core"], function(exports_1, context_1) {
                         _this.display = "stats";
                         initialisation('48.866667', '2.3333333');
                     });
-                    initGraph();
+                    //initGraph(lesKeys, lesData);
+                    $("#EmplacementDeMaCarte").hide();
                     $("#s").show();
                 };
                 NavigationAppComponent = __decorate([
