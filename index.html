@@ -105,7 +105,7 @@
 
             function initGraph(nameGraph, lesKeys, lesDatas) {
                 var svgdoc = document.getElementById("s");
-                
+                svgdoc.innerHTML = '';
                 drawArcs(svgdoc, lesKeys, lesDatas);
                 
                 // You can attach additional content (from e.g. AJAX) like this:
@@ -179,11 +179,8 @@
         </div>
         <!--<div class="col-xs-3"></div>-->
     </div>
-    <div class="container">
-        <div class='col-xs-12' id='les_btns'>
-            <a href="javascript:void(0)" class="btn btn-raised btn-xs">Statistiques par departements</a>
-            <a href="javascript:void(0)" class="btn btn-raised btn-xs">Statistiques par regions</a>
-        </div>
+    <div class="container" id='partie_stats'>
+        
         <div class="col-xs-12" id="super_svg">
             <div id="con">
                 

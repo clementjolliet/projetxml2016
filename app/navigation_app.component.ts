@@ -103,18 +103,20 @@ export class NavigationAppComponent {
 		component.zone.run(() => {
 			this.display = "monument";
 	    });
+            $("#EmplacementDeMaCarte").show();
 	}
 
 	afficherListe()
 	{
+                $("#partie_stats").hide();
+                $("#EmplacementDeMaCarte").show();
 		var component = this;
 		
 		component.zone.run(() => {
 			this.display = "liste";
 			initialisation('48.866667', '2.3333333');
 		});
-                $("#s").hide();
-                $("#les_btns").hide();
+                //$("#EmplacementDeMaCarte").hide();
 	}
 
 	afficherStats(typeStat)
@@ -127,7 +129,6 @@ export class NavigationAppComponent {
                         
 		});
 
-		//var url = 'http://localhost:1337/api/getStats?searchBy=regions';
                 var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
 		var component = this;
 
@@ -149,7 +150,7 @@ export class NavigationAppComponent {
 
 				initGraph(libelle[typeStat], lesKeys, lesData);
 				$("#s").show();
-                                $("#les_btns").show();
+                                $("#partie_stats").show();
 			},
 			error : function(resultat, statut, erreur){
 
