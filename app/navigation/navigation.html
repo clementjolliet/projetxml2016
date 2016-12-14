@@ -73,6 +73,13 @@
 
     <div *ngIf='display=="stats"'>
         <br />
+        <div class='col-xs-12' id="la_liste">
+            <select #resultat>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
         <div class='col-xs-12' id='les_btns'>
             <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStats('communautes')">Statistiques par communautes</a>
             <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStats('departements')">Statistiques par departements</a>
