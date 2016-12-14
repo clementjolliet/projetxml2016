@@ -103,20 +103,23 @@ export class NavigationAppComponent {
 		component.zone.run(() => {
 			this.display = "monument";
 	    });
+            $("#EmplacementDeMaCarte").show();
 	}
 
 	afficherListe()
 	{
+                $("#partie_stats").hide();
+                $("#EmplacementDeMaCarte").show();
 		var component = this;
 		
 		component.zone.run(() => {
 			this.display = "liste";
 			initialisation('48.866667', '2.3333333');
 		});
-                $("#s").hide();
+                //$("#EmplacementDeMaCarte").hide();
 	}
 
-	afficherStatsDepartements()
+	afficherStats(typeStat)
 	{
 		var component = this;
 		
@@ -126,9 +129,10 @@ export class NavigationAppComponent {
                         
 		});
 
-		var url = 'http://localhost:1337/api/getStats?searchBy=regions';
-
+                var url = 'http://localhost:1337/api/getStats?searchBy=' + typeStat;
 		var component = this;
+
+                var libelle = {"regions" : "Affichage des régions", "departements" : "Affichage des départements"};
 
 		$.ajax({
 			url : url,
@@ -144,8 +148,9 @@ export class NavigationAppComponent {
 					lesData.push(parseInt(res[i]["nombre"]));
 				}
 
-				initGraph(lesKeys, lesData);
+				initGraph(libelle[typeStat], lesKeys, lesData);
 				$("#s").show();
+                                $("#partie_stats").show();
 			},
 			error : function(resultat, statut, erreur){
 

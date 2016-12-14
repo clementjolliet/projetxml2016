@@ -25,7 +25,7 @@
                 </div>
             </form>
             <form class="navbar-form navbar-right">
-                <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStatsDepartements()">Statistiques</a>
+                <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStats('regions')">Statistiques</a>
             </form>
         </div>
     </div>
@@ -73,7 +73,10 @@
 
     <div *ngIf='display=="stats"'>
         <br />
-
+        <div class='col-xs-12' id='les_btns'>
+            <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStats('departements')">Statistiques par departements</a>
+            <a href="javascript:void(0)" class="btn btn-raised btn-xs" (click)="afficherStats('regions')">Statistiques par regions</a>
+        </div>
         <!--        <figure>
                     <figcaption>
                         Statistiques disponibles

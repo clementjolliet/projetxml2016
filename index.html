@@ -19,10 +19,24 @@
                 resize:both;
                 overflow:hidden;
                 display:inline-block;
-                width: 800px !important;
-                height: 800px !important;
+                width: 700px !important;
+                height: 700px !important;
                 padding:0.5em;
             }
+            #super_svg #con svg {
+                padding: 50px;
+                background-color: rgba(255, 255, 255, 0.5);
+                border: 2px solid #ffffff;
+                border-radius: 3px;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            }
+            #les_btns {
+                text-align : center;
+            }
+            #super_svg #con svg text {
+                font-weight: bold;
+            }
+            
         </style>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjc3PraqEFlK6fjnOvHF1CKBVCtRd1z2M"></script>
@@ -89,17 +103,15 @@
                 }
             }
 
-            function initGraph(lesKeys, lesDatas) {
+            function initGraph(nameGraph, lesKeys, lesDatas) {
                 var svgdoc = document.getElementById("s");
-                //drawArcs(svgdoc, [52, 15, 20, 80]); // here is the pie chart data
-                //drawArcs(svgdoc, ["toto", "titi", "tutu"], [25, 25, 25]);
-                
+                svgdoc.innerHTML = '';
                 drawArcs(svgdoc, lesKeys, lesDatas);
                 
                 // You can attach additional content (from e.g. AJAX) like this:
                 var parser = new DOMParser();
                 var docToEmbed = parser.parseFromString(
-                        "<svg xmlns='http://www.w3.org/2000/svg'><text x='50' y='50' fill='black'>hi</text></svg>",
+                        "<svg xmlns='http://www.w3.org/2000/svg'><text x='0' y='10' fill='black'>"+ nameGraph +"</text></svg>",
                         "image/svg+xml");
                 Array.prototype.slice.call(docToEmbed.documentElement.childNodes).forEach(function (elem) {
                     svgdoc.appendChild(document.importNode(elem, true));
@@ -167,9 +179,9 @@
         </div>
         <!--<div class="col-xs-3"></div>-->
     </div>
-    <div class="container">
-        <div class="col-xs-3"></div>
-        <div class="col-xs-6" id="super_svg">
+    <div class="container" id='partie_stats'>
+        
+        <div class="col-xs-12" id="super_svg">
             <div id="con">
                 
                 <!-- the div container is of course optional. It is used with 
@@ -177,14 +189,18 @@
                 <svg width="100%" height="100%" id="s"
                      xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400">
                 <style type="text/css">
+                    path {
+                        opacity: 0.7;
+                    }
                     path:hover {
-                        opacity: 0.8;
+                        opacity: 1;
+                        cursor: pointer;
                     }
                 </style>
                 </svg>
             </div>
         </div>
-        <div class="col-xs-3"></div>
+        
     </div>
 
 
